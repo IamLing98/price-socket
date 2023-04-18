@@ -3,7 +3,7 @@ const fs = require("fs");
 const logger = require("../utils/logger");
 const constants = require("../utils/constants"); 
 
-const MarkPrice = require("../models/markPrice");
+const MarkPrice = require("../models/mark_price.model");
 
 function convertTickerPriceToSQLRow(tickerPrice) {
   let row = {

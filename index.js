@@ -1,16 +1,21 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const database = require('./config/database');
+const logger = require('./utils/logger')
 
-database.authenticate().then(() => {
-    console.log('Connection has been established successfully.');
- }).catch((error) => {
-    console.error('Unable to connect to the database: ', error);
- });
+const database = require("./config/database");
 
-const webSocketService = require("./services/webSocketService"); 
+database
+  .authenticate()
+  .then(() => {
+    logger.info("Connection has been established successfully.");
+  })
+  .catch((error) => {
+    logger.info("Unable to connect to the database: ", error);
+  });
 
-webSocketService.init(); 
+const webSocketService = require("./services/webSocketService");
+
+webSocketService.init();
 
 // let formatMemoryUsage;
 //   let memoryData;

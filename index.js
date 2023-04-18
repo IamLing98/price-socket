@@ -7,7 +7,7 @@ const database = require("./config/database");
 database
   .authenticate()
   .then(() => {
-    logger.info("Connection has been established successfully.");
+    logger.info("Database-connection has been established successfully.");
   })
   .catch((error) => {
     logger.info("Unable to connect to the database: ", error);

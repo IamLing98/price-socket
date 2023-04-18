@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "kafkajs": "^2.2.4",
     "moment": "^2.29.4",
+    "pino": "^8.11.0",
+    "pino-pretty": "^10.0.0",
     "ws": "^8.13.0"
   }
 }

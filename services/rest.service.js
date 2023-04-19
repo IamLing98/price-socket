@@ -1,12 +1,12 @@
+const axios = require("axios");
+const sha256 = require("sha256");
+const crypto = require("crypto");
+
 const constants = require("../utils/constants");
 
 const logger = require("../utils/logger");
 
-const axios = require("axios");
-
-const sha256 = require("sha256");
-const crypto = require("crypto");
-const configs = require("../utils/config.utils");
+const configs = require("../utils/config.utils"); 
 
 function getSignature(apiSecret, timestamp) {
   logger.info(`Starting get signature ${apiSecret}, ${timestamp}`);
@@ -71,23 +71,18 @@ async function getAccountInfo(timestamp, signature) {
       },
     })
     .then(async (response) => {
-      console.log(`Reponse: `, response.data);
-      return response;
+      logger.info(`Get account info at ${timestamp} done`);
+      return response.data;
     })
     .catch((error) => {
+      logger.error(`Get account info at ${timestamp} failed`);
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
       } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser
-        // and an instance of http.ClientRequest in node.js
         console.log(error.request);
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.log("Error", error.message);
       }
     });
@@ -99,7 +94,8 @@ async function getAccountInfoStart() {
   logger.info(`serverTime ${serverTime}`);
   let signature = getSignature(configs.api.SECRET, serverTime);
   logger.info(`signature: ${signature}`);
-  getAccountInfo(serverTime, signature);
+  let accountInfo = await getAccountInfo(serverTime, signature);
+  return accountInfo;
 }
 
 module.exports = {

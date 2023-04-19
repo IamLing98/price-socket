@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/database");
 
-const MarkPrice = sequelize.define("markPrices", {
+const MarkPrice = sequelize.define("mark_prices", {
   event_type: {
     type: DataTypes.STRING,
   },

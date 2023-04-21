@@ -90,10 +90,8 @@ async function getAccountInfo(timestamp, signature) {
 }
 
 async function getAccountInfoStart() {
-  let serverTime = await getTimestamp(configs.api.KEY);
-  logger.info(`serverTime ${serverTime}`);
-  let signature = getSignature(configs.api.SECRET, serverTime);
-  logger.info(`signature: ${signature}`);
+  let serverTime = await getTimestamp(configs.api.KEY); 
+  let signature = getSignature(configs.api.SECRET, serverTime); 
   let accountInfo = await getAccountInfo(serverTime, signature);
   return accountInfo;
 }
